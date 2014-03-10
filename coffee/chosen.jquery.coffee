@@ -206,6 +206,10 @@ class Chosen extends AbstractChosen
       @result_highlight = el
       @result_highlight.addClass "highlighted"
 
+      highlightedIndex = $(@result_highlight).attr('data-option-array-index')
+      highlightedValue = $(@form_field_jq).find('option').eq(highlightedIndex).val()
+      @form_field_jq.trigger("chosen:highlighted", highlightedValue)
+
       maxHeight = parseInt @search_results.css("maxHeight"), 10
       visible_top = @search_results.scrollTop()
       visible_bottom = maxHeight + visible_top
