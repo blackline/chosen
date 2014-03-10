@@ -63,7 +63,7 @@ class SelectParser
       return ""
     unless /[\n]/.test(text)
       return text
-    text.replace /\n/, "<br>"
+    text.replace /\n/, " <br> "
 
 SelectParser.select_to_array = (select) ->
   parser = new SelectParser()
