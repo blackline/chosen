@@ -30,7 +30,7 @@ class SelectParser
           options_index: @options_index
           value: option.value
           text: option.text
-          html: option.innerHTML
+          html: this.addNewlines(option.innerHTML)
           selected: option.selected
           disabled: if group_disabled is true then group_disabled else option.disabled
           group_array_index: group_position
@@ -57,6 +57,13 @@ class SelectParser
     unsafe_chars = /&(?!\w+;)|[\<\>\"\'\`]/g
     text.replace unsafe_chars, (chr) ->
       map[chr] || "&amp;"
+
+  addNewlines: (text) ->
+    if not text? or text is false
+      return ""
+    unless /[\n]/.test(text)
+      return text
+    text.replace /\n/, "<br>"
 
 SelectParser.select_to_array = (select) ->
   parser = new SelectParser()
